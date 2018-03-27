@@ -18,6 +18,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static final String BING_PIC_URL = "http://guolin.tech/api/bing_pic";
+    private static final String GIF_URL = "http://p1.pstatp.com/large/166200019850062839d3";
 
     private Button mLoadImage;
     private ImageView mImageView;
@@ -48,15 +49,21 @@ public class MainActivity extends AppCompatActivity {
 
                 final String bingPic = response.body().string();
 
+//                final String bingPic = GIF_URL;
+
                 runOnUiThread(() -> {
 
                         RequestOptions requestOptions =
                                 new RequestOptions()
-                                        .placeholder(R.drawable.emma)
-                                        .diskCacheStrategy(DiskCacheStrategy.NONE);
+                                        .placeholder(R.drawable.emma_loading)
+                                        .error(R.drawable.emma_error)
+                                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                        .override(1000, 1000);
 
                         Glide
                                 .with(MainActivity.this)
+//                                .asBitmap()
+//                                .asGif()
                                 .load(bingPic)
                                 .apply(requestOptions)
                                 .into(mImageView);
