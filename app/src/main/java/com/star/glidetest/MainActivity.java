@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
 
                 final String bingPic = response.body().string();
-
 //                final String bingPic = GIF_URL;
 
                 runOnUiThread(() -> {
